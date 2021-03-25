@@ -21,6 +21,14 @@ class perso{
         $this->_attaque = $attaque;
     }
 
+    public function setPersoById($id){
+        $req = "select * from perso where idperso='".$id."'";
+        $Resul = $this->_bdd->query($req);
+        if($tab = $Resul->fetch()){
+            $this->setPerso($tab['id'], $tab['nom'], $tab['vie'], $tab['attaque']);
+        }
+    }
+
     public function getListPerso(){
         $req = "select * from perso where 1";
         $Resul = $this->_bdd->query($req);
@@ -38,19 +46,20 @@ class perso{
         <?php
     }
 
-    public function getNom()
-    {
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function getNom(){
         return $this->_nom;
     }
 
 
-    public function getSac()
-    {
+    public function getSac(){
         return $this->_sac;
     }
 
-    public function getStrListeArme()
-    {
+    public function getStrListeArme(){
         $string = "";
         foreach($this->_sac as $Armes)
         {

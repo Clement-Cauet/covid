@@ -20,7 +20,7 @@ session_start();
         if($access){
         
             echo "BIENVENUE sur CE COMBAT ".$joueur->getlogin();
-            echo "TU COMBAT AVEC ".$joueur->getNomPerso();
+            //echo "TU COMBAT AVEC ".$joueur->getNomPerso();
             echo '<a href="index.php" >retour menu</a>';
     
         }else{

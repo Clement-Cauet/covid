@@ -20,12 +20,11 @@ session_start();
 
         if($access){
             
-            echo "BIENVENUE sur MON SITE".$joueur->getLogin();
-            echo '<a href="combat.php">vient combattre</a>';
+            echo "BIENVENUE sur MON SITE ".$joueur->getLogin();
             $perso = new perso($BDD);
             $perso->getListPerso();
             if(!$perso->getId()==0){
-                $joueur->setPersonnage($perso);
+                $joueur->setPersoById($perso->getId());
             }
             
             if(!empty($perso->getNom())){

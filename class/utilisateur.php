@@ -14,12 +14,12 @@
 
         public function setUser($id, $login, $mdp){
             $this->_id = $id;
-            $this->_login = $id;
+            $this->_login = $login;
             $this->_mdp = $mdp;
         }
 
         public function setUserById($id){
-            $Result = $this->_bdd->query("SELECT * FROM `User` WHERE `id`='".$id."' ");
+            $Result = $this->_bdd->query("SELECT * FROM `utilisateur` WHERE `id`='".$id."' ");
             if($tab = $Result->fetch()){ 
                 $this->setUser($tab["id"],$tab["login"],$tab["mdp"]);
                 $perso = new perso($this->_bdd);
@@ -28,9 +28,9 @@
             }
         }
 
-        public function setperso(){
-            $this->_idperso;
-            $req = 'UPDATE `utilisateur` SET `idperso`='.$this->_idperso.' WHERE `id`='.$this->_id.'';
+        public function setperso($perso){
+            $this->_idperso = $perso;
+            $req = 'UPDATE `utilisateur` SET `idperso`='.$perso->getId().' WHERE `id`='.$this->_id.'';
             $Result = $this->_bdd->query($req);
         }
 
@@ -51,6 +51,7 @@
                 $Result = $this->_bdd->query("SELECT * FROM `utilisateur` WHERE `login`='".$_POST['login']."' AND `mdp` = '".$_POST['password']."'");
                 if($tab = $Result->fetch()){ 
                     //si mdp = ok
+                    $this->setUserById($tab['id']);
                     $access = true;
                     $_SESSION["Connected"]=true;
                     $afficheForm = false;
@@ -74,7 +75,7 @@
                         <input type="password" name="password" id="password" required>
                     </div>
                     <div >
-                        <input type="submit" value="Go!" >
+                        <input type="submit" value="Connecte-toi" >
                     </div>
                 </form>
 
@@ -103,7 +104,7 @@
             ?>
                 <form action="" method="post" >
                     <div >
-                        <input type="submit" value="Deco!" name="logout">
+                        <input type="submit" value="Déconnexion" name="logout">
                     </div>
                 </form>
 

@@ -18,14 +18,12 @@ session_start();
         include "function.php"; 
 
         if($access){
-            
-            echo "BIENVENUE sur CE COMBAT";
-
-
-            
-
+        
+            echo "BIENVENUE sur CE COMBAT ".$joueur->getlogin();
+            echo "TU COMBAT AVEC ".$joueur->getNomPerso();
+            echo '<a href="index.php" >retour menu</a>';
+    
         }else{
-            echo "c'est ouf";
             echo $errorMessage;
         }
     ?>

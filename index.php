@@ -1,4 +1,6 @@
-<?php session_start();
+<?php 
+
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -14,15 +16,25 @@
 <body>
     
     <?php
-        include "function.php"; 
+        include "function.php";
 
         if($access){
             
-            echo "BIENVENUE sur MON SITE";
-            echo '<a href="combat.php">vient combatre</a>';
+            echo "BIENVENUE sur MON SITE".$joueur->getLogin();
+            echo '<a href="combat.php">vient combattre</a>';
+            $perso = new perso($BDD);
+            $perso->getListPerso();
+            if(!$perso->getId()==0){
+                $joueur->setPersonnage($perso);
+            }
+            
+            if(!empty($perso->getNom())){
+                echo '<a href="combat.php">vient combatre avec'.$perso->getNom().'</a>';
+            }else{
+                echo '<a href="combat.php">vient combatre avec'.$joueur->getNomPerso().'</a>';
+            }
 
         }else{
-            echo "c'est ouf";
             echo $errorMessage;
         }
     ?>
